@@ -24,11 +24,10 @@ import static java.lang.Integer.parseInt;
 public class TimeMachine
 {
     public static void main( String[] args ) throws InterruptedException, IOException {
-        File data = new File("C:\\Users\\Jarred\\Documents\\Visual Studio 2015\\Projects\\OneTimeCrawler\\OneTimeCrawler\\bin\\Debug\\data");
+        File data = new File("data/");
+        System.out.println(data.getAbsolutePath());
         for(File fileEntry : data.listFiles()){
             if(fileEntry.isFile() && fileEntry.getName().endsWith(".txt")){
-
-
                 FileReader fr = new FileReader(fileEntry.getPath());
                 BufferedReader br = new BufferedReader(fr);
 
@@ -40,7 +39,7 @@ public class TimeMachine
                 SimpleDateFormat expenseDateFormat = new SimpleDateFormat("dd/MM/YYYY");
                 SimpleDateFormat timeDateFormat = new SimpleDateFormat("EEEEEE, MMMMMM dd, yyyy");
 
-                int year = parseInt("20" + name[2].split("\\.")[0]);
+                int year = parseInt(name[2].split("\\.")[0]);
                 int month = parseInt(name[1]) - 1;
                 int date = parseInt(name[0]);
                 timesheetCalendar.set(year, month, date);
@@ -56,7 +55,6 @@ public class TimeMachine
                     String jobNumber = br.readLine();
                     if(jobNumber == null) break;
                     String subject = br.readLine();
-                    String site = br.readLine();
                     String jobType = br.readLine();
                     String startTime = br.readLine();
                     String endTime = br.readLine();
@@ -163,7 +161,7 @@ public class TimeMachine
 
                     element = driver.findElement(By.id("refIntCmtsTxtBox"));
                     element.clear();
-                    element.sendKeys(site);
+                    element.sendKeys(subject);
 
                     driver.findElement(By.id("saveBtn")).click();
 
